@@ -1,6 +1,7 @@
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_quiz_test/model/model_quiz.dart';
+import 'package:flutter_quiz_test/screen/screen_result.dart';
 import 'package:flutter_quiz_test/widget/widget_candidate.dart';
 import 'package:flutter_swiper/flutter_swiper.dart';
 
@@ -49,7 +50,7 @@ class _QuizScreenState extends State<QuizScreen> {
       List<Widget> _children = [];
       for (int i = 0; i < 4; i++) {
         _children.add(CandWidget(
-            index: 1,
+            index: i,
             text: quiz.candidates[i],
             width: width,
             answerState: _answerStates[i],
@@ -125,6 +126,12 @@ class _QuizScreenState extends State<QuizScreen> {
                             ? null
                             : () {
                                 if (_currentIndex == widget.quizs.length - 1) {
+                                  Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                          builder: (context) => ResultScreen(
+                                              answers: _answers,
+                                              quizs: widget.quizs)));
                                 } else {
                                   _answerStates = [false, false, false, false];
                                   _currentIndex += 1;
